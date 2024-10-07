@@ -11,3 +11,8 @@ Kullanilan paketler
 1- Microsoft.EntityFrameworkCore
 2- Microsoft.EntityFrameworkCore.SqlServer
 3- Microsoft.EntityFrameworkCore.Tools
+
+JSON VIEWER PRO
+https://chromewebstore.google.com/detail/json-viewer-pro/eifflpmocdbdmepbjaopkkhbfmdgijcc?pli=1
+Json Viewer pro ile json verileri daha anlaşılır bir şekilde görebilirsiniz. Bir chrome eklentisidir.
+
