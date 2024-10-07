@@ -49,7 +49,7 @@ namespace Follow.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BlogCategories");
+                    b.ToTable("BlogCategories", (string)null);
                 });
 
             modelBuilder.Entity("Follow.Data.Models.BlogPost", b =>
@@ -84,7 +84,7 @@ namespace Follow.Data.Migrations
 
                     b.HasIndex("BlogCategoryId");
 
-                    b.ToTable("BlogPosts");
+                    b.ToTable("BlogPosts", (string)null);
                 });
 
             modelBuilder.Entity("Follow.Data.Models.BlogPost", b =>

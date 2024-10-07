@@ -16,3 +16,6 @@ JSON VIEWER PRO
 https://chromewebstore.google.com/detail/json-viewer-pro/eifflpmocdbdmepbjaopkkhbfmdgijcc?pli=1
 Json Viewer pro ile json verileri daha anlaşılır bir şekilde görebilirsiniz. Bir chrome eklentisidir.
 
+FluentValidation
+https://fluentvalidation.net/
+Fluent validation , .NET platformu üzerinde çalışan bir validasyon kütüphanesidir. Fluent validation ile nesne üzerinde validasyon işlemlerini daha kolay ve daha hızlı bir şekilde gerçekleştirebilirsiniz. Ornegin bir nesne üzerindeki property'lerin boş olup olmadığını, belirli bir uzunlukta olup olmadığını, belirli bir formatta olup olmadığını kontrol edebilirsiniz.
