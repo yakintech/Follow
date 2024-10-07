@@ -1,0 +1,5 @@
+﻿POSTMAN
+https://www.postman.com/
+
+Postman nedir?
+Postman, API'lerinizi test etmenize, belgelerinizi oluşturmanıza ve paylaşmanıza olanak tanıyan bir API geliştirme ortamıdır. Postman, API'lerinizi test etmek için birçok özellik sunar ve bu özellikler sayesinde API'lerinizi daha hızlı ve daha kolay bir şekilde test edebilirsiniz.
