@@ -3,3 +3,11 @@ https://www.postman.com/
 
 Postman nedir?
 Postman, API'lerinizi test etmenize, belgelerinizi oluşturmanıza ve paylaşmanıza olanak tanıyan bir API geliştirme ortamıdır. Postman, API'lerinizi test etmek için birçok özellik sunar ve bu özellikler sayesinde API'lerinizi daha hızlı ve daha kolay bir şekilde test edebilirsiniz.
+
+
+Entity Framework Nedir?
+Entity Framework, Microsoft tarafından geliştirilen ve .NET platformu üzerinde çalışan bir ORM (Object Relational Mapping) aracıdır. Entity Framework, veritabanı işlemlerini nesne yönelimli programlama mantığı ile gerçekleştirmenizi sağlar. Bu sayede veritabanı işlemlerini daha kolay ve daha hızlı bir şekilde gerçekleştirebilirsiniz.
+Kullanilan paketler
+1- Microsoft.EntityFrameworkCore
+2- Microsoft.EntityFrameworkCore.SqlServer
+3- Microsoft.EntityFrameworkCore.Tools
