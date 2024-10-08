@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Follow.Business.Repository
 {
-    public class GenericRepository<T> where T : BaseModel
+    public class GenericRepository<T> : IGenericRepository<T> where T : BaseModel
     {
         internal FollowContext followContext;
         internal DbSet<T> dbSet;
@@ -86,4 +86,7 @@ namespace Follow.Business.Repository
             return entity;
         }
     }
+
+
+
 }

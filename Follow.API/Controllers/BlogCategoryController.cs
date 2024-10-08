@@ -9,14 +9,13 @@ namespace Follow.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class BlogCategoryController : ControllerBase
     {
-        private GenericRepository<BlogCategory> blogCategoryRepository;
+        private IGenericRepository<BlogCategory> blogCategoryRepository;
 
-        public BlogCategoryController()
+        public BlogCategoryController(IGenericRepository<BlogCategory> blogCategoryRepository)
         {
-            blogCategoryRepository = new GenericRepository<BlogCategory>();
+            this.blogCategoryRepository = blogCategoryRepository;
         }
 
         [HttpGet]
@@ -60,7 +59,7 @@ namespace Follow.API.Controllers
 
 
         [HttpPost]
-        public IActionResult Create([FromForm]CreateBlogCategoryRequestDTO blogCategory)
+        public IActionResult Create(CreateBlogCategoryRequestDTO blogCategory)
         {
             var newBlogCategory = new BlogCategory
             {

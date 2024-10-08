@@ -11,11 +11,11 @@ namespace Follow.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        GenericRepository<AdminUser> adminUserRepository;
+        IGenericRepository<AdminUser> adminUserRepository;
 
-        public AuthController()
+        public AuthController(IGenericRepository<AdminUser> adminUserRepository)
         {
-            adminUserRepository = new GenericRepository<AdminUser>();
+            this.adminUserRepository = adminUserRepository;
         }
 
         [HttpPost]

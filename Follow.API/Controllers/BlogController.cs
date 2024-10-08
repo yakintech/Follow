@@ -13,12 +13,13 @@ namespace Follow.API.Controllers
     [Authorize]
     public class BlogController : ControllerBase
     {
-        GenericRepository<BlogPost> blogPostRepository;
+        IGenericRepository<BlogPost> blogPostRepository;
 
-        public BlogController()
+        public BlogController(IGenericRepository<BlogPost> blogPostRepository)
         {
-            blogPostRepository = new GenericRepository<BlogPost>();
+            this.blogPostRepository = blogPostRepository;
         }
+       
 
         [HttpPost]
         public IActionResult Post([FromForm]CreateBlogRequestDTO model)

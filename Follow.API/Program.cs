@@ -2,9 +2,14 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Follow.API.DTO.BlogCategory;
 using Follow.API.Validators;
+using Follow.Business.Repository;
+using Follow.Data.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +20,34 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddFluentValidationAutoValidation();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+               builder =>
+               {
+                   //builder.WithOrigins("http://127.0.0.1:5500")
+                   builder.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+
+
+
+builder.Services.AddRateLimiter(options =>
+{
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: httpContext.User.Identity?.Name ?? httpContext.Request.Headers.Host.ToString(),
+            factory: partition => new FixedWindowRateLimiterOptions
+            {
+                AutoReplenishment = true,
+                PermitLimit = 500,
+                Window = TimeSpan.FromMinutes(1)
+            }));
+});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -39,6 +70,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddScoped<IValidator<CreateBlogCategoryRequestDTO>, CreateBlogCategoryRequestValidator>();
 
+builder.Services.AddScoped<IGenericRepository<BlogCategory>, GenericRepository<BlogCategory>>();
+builder.Services.AddScoped<IGenericRepository<BlogPost>, GenericRepository<BlogPost>>();
+builder.Services.AddScoped<IGenericRepository<AdminUser>, GenericRepository<AdminUser>>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -53,6 +88,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseCors("AllowAll");
+app.UseRateLimiter();
 app.MapControllers();
 
 app.Run();

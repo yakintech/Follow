@@ -26,7 +26,7 @@ namespace Follow.API.Models
                 issuer: "garanti",
                 audience: "garanti",
                 claims: claimsData,
-                expires: DateTime.Now.AddSeconds(40),
+                expires: DateTime.Now.AddMinutes(40),
                 signingCredentials: signingCredentials
             );
 
@@ -41,7 +41,7 @@ namespace Follow.API.Models
             refreshTokenRepository.Create(new RefreshToken
             {
                 Token = refreshToken,
-                Expiration = DateTime.Now.AddSeconds(120),
+                Expiration = DateTime.Now.AddHours(120),
                 Revoked = false,
                 UserId = user.Id
             });
