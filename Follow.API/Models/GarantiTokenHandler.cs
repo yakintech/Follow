@@ -1,4 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Follow.Business.Repository;
+using Follow.Data.Models;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -7,9 +9,9 @@ namespace Follow.API.Models
 {
     public class GarantiTokenHandler
     {
-        public string CreateToken(string email)
+        public TokenModel CreateToken(string email)
         {
-            var claimsData  = new[]
+            var claimsData = new[]
             {
                 new Claim(ClaimTypes.Email, email)
             };
@@ -24,11 +26,50 @@ namespace Follow.API.Models
                 issuer: "garanti",
                 audience: "garanti",
                 claims: claimsData,
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddSeconds(40),
                 signingCredentials: signingCredentials
             );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+            var refreshToken = GenerateRefreshToken();
+
+            GenericRepository<RefreshToken> refreshTokenRepository = new GenericRepository<RefreshToken>();
+            GenericRepository<AdminUser> userRepository = new GenericRepository<AdminUser>();
+
+            var user =  userRepository.GetByQuery(x => x.Email == email);
+
+            refreshTokenRepository.Create(new RefreshToken
+            {
+                Token = refreshToken,
+                Expiration = DateTime.Now.AddSeconds(120),
+                Revoked = false,
+                UserId = user.Id
+            });
+
+            return new TokenModel
+            {
+                Token = tokenString,
+                RefreshToken = refreshToken
+            };
+
+        }
+
+
+        public string GenerateRefreshToken()
+        {
+            return Guid.NewGuid().ToString();
         }
     }
+
+
+
+
+    public class TokenModel
+    {
+        public string Token { get; set; }
+        public string RefreshToken { get; set; }
+
+    }
+
+
 }
