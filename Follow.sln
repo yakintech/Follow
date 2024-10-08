@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Follow.API", "Follow.API\Follow.API.csproj", "{E6EEBFEC-8E3C-4127-8E41-85529C3D1AD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Follow.API", "Follow.API\Follow.API.csproj", "{E6EEBFEC-8E3C-4127-8E41-85529C3D1AD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Follow.Data", "Follow.Data\Follow.Data.csproj", "{AA0E7812-69F1-43BF-9552-E7AEB106129A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Follow.Data", "Follow.Data\Follow.Data.csproj", "{AA0E7812-69F1-43BF-9552-E7AEB106129A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Follow.Business", "Follow.Business\Follow.Business.csproj", "{79B0C50A-1FBB-4970-BB9B-448792879C8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{AA0E7812-69F1-43BF-9552-E7AEB106129A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA0E7812-69F1-43BF-9552-E7AEB106129A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA0E7812-69F1-43BF-9552-E7AEB106129A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79B0C50A-1FBB-4970-BB9B-448792879C8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79B0C50A-1FBB-4970-BB9B-448792879C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79B0C50A-1FBB-4970-BB9B-448792879C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79B0C50A-1FBB-4970-BB9B-448792879C8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

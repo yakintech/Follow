@@ -19,3 +19,7 @@ Json Viewer pro ile json verileri daha anlaşılır bir şekilde görebilirsiniz
 FluentValidation
 https://fluentvalidation.net/
 Fluent validation , .NET platformu üzerinde çalışan bir validasyon kütüphanesidir. Fluent validation ile nesne üzerinde validasyon işlemlerini daha kolay ve daha hızlı bir şekilde gerçekleştirebilirsiniz. Ornegin bir nesne üzerindeki property'lerin boş olup olmadığını, belirli bir uzunlukta olup olmadığını, belirli bir formatta olup olmadığını kontrol edebilirsiniz.
+
+.Net Repository Pattern
+https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application
+Repository pattern , bir yazılım mimarisi tasarım desenidir. Repository pattern, veritabanı işlemlerini soyutlar ve veritabanı işlemlerini gerçekleştiren sınıfların soyutlanmasını sağlar. Bu sayede veritabanı işlemlerini daha kolay ve daha hızlı bir şekilde gerçekleştirebilirsiniz. Repository pattern, veritabanı işlemlerini soyutladığı için veritabanı işlemlerini değiştirmeniz gerektiğinde sadece repository sınıflarını değiştirmeniz yeterli olacaktır. Bu sayede veritabanı işlemlerini değiştirmeniz gerektiğinde tüm projeyi değiştirmenize gerek kalmaz.

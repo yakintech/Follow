@@ -1,4 +1,5 @@
 ﻿using Follow.API.DTO.BlogCategory;
+using Follow.Business.Repository;
 using Follow.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,17 +10,17 @@ namespace Follow.API.Controllers
     [ApiController]
     public class BlogCategoryController : ControllerBase
     {
-        private FollowContext followContext;
+        private GenericRepository<BlogCategory> blogCategoryRepository;
 
         public BlogCategoryController()
         {
-            followContext = new FollowContext();
+            blogCategoryRepository = new GenericRepository<BlogCategory>();
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            List<BlogCategory> data = followContext.BlogCategories.ToList();
+            List<BlogCategory> data = blogCategoryRepository.GetAll();
             List<GetAllBlogCategoriesResponseDTO> response = new List<GetAllBlogCategoriesResponseDTO>();
 
             foreach (var item in data)
@@ -38,9 +39,8 @@ namespace Follow.API.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            // find veya firstordefault kullanılabilir. ikisiyle de ayni islemi yapiyoruz.
-            //var data = followContext.BlogCategories.Find(id);
-            var data = followContext.BlogCategories.FirstOrDefault(x => x.Id == id && x.IsDeleted == false);
+            
+            var data = blogCategoryRepository.GetById(id);
 
             if (data == null)
             {
@@ -58,7 +58,7 @@ namespace Follow.API.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(CreateBlogCategoryRequestDTO blogCategory)
+        public IActionResult Create([FromForm]CreateBlogCategoryRequestDTO blogCategory)
         {
             var newBlogCategory = new BlogCategory
             {
@@ -66,8 +66,7 @@ namespace Follow.API.Controllers
                 Description = blogCategory.Description
             };
 
-            followContext.BlogCategories.Add(newBlogCategory);
-            followContext.SaveChanges();
+            blogCategoryRepository.Create(newBlogCategory);
 
             return Created("", newBlogCategory.Id);
         }
@@ -76,15 +75,14 @@ namespace Follow.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var data = followContext.BlogCategories.FirstOrDefault(x => x.Id == id);
+            var data = blogCategoryRepository.GetById(id);
 
             if (data == null)
             {
                 return NotFound("Data not found. Id: " + id);
             }
 
-            followContext.BlogCategories.Remove(data);
-            followContext.SaveChanges();
+            blogCategoryRepository.Delete(id);
 
             return Ok();
         }
@@ -93,7 +91,7 @@ namespace Follow.API.Controllers
         [HttpPut]
         public IActionResult Update(UpdateBlogCategoryRequestDto blogCategory)
         {
-            var data = followContext.BlogCategories.FirstOrDefault(x => x.Id == blogCategory.Id);
+            var data = blogCategoryRepository.GetById(blogCategory.Id);
 
             if (data == null)
             {
@@ -103,7 +101,7 @@ namespace Follow.API.Controllers
             data.Name = blogCategory.Name;
             data.Description = blogCategory.Description;
 
-            followContext.SaveChanges();
+            blogCategoryRepository.Update(data);
 
             return Ok(data.Id);
         }

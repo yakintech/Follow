@@ -1,4 +1,5 @@
 ﻿using Follow.API.DTO.Blog;
+using Follow.Business.Repository;
 using Follow.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,11 +11,11 @@ namespace Follow.API.Controllers
     [ApiController]
     public class BlogController : ControllerBase
     {
-        private FollowContext followContext;
+        GenericRepository<BlogPost> blogPostRepository;
 
         public BlogController()
         {
-            followContext = new FollowContext();
+            blogPostRepository = new GenericRepository<BlogPost>();
         }
 
         [HttpPost]
@@ -27,8 +28,7 @@ namespace Follow.API.Controllers
                 BlogCategoryId = model.CategoryId
             };
 
-            followContext.BlogPosts.Add(blog);
-            followContext.SaveChanges();
+            blogPostRepository.Create(blog);
 
             return Ok(blog.Id);
 
@@ -40,7 +40,8 @@ namespace Follow.API.Controllers
         {
             List<GetAllBlogPostResponseDTO> getAllBlogPostResponseDTOs = new List<GetAllBlogPostResponseDTO>();
 
-            var data = followContext.BlogPosts.Include("BlogCategory").ToList();
+            var data = blogPostRepository.GetAllWithIncludes(new string[] { "BlogCategory" });
+            //var data = followContext.BlogPosts.Include("BlogCategory").ToList();
             // select * from BlogPosts inner join BlogCategories on BlogPosts.BlogCategoryId = BlogCategories.Id
 
             foreach (var item in data)
@@ -64,7 +65,7 @@ namespace Follow.API.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var data = followContext.BlogPosts.Include("BlogCategory").FirstOrDefault(x => x.Id == id);
+            var data = blogPostRepository.GetByIdWitIncludes(id, new string[] { "BlogCategory" });
 
             if (data == null)
             {
@@ -89,15 +90,14 @@ namespace Follow.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var data = followContext.BlogPosts.FirstOrDefault(x => x.Id == id);
+            var data = blogPostRepository.GetById(id);
 
             if (data == null)
             {
                 return NotFound("Data not found. Id: " + id);
             }
 
-            followContext.BlogPosts.Remove(data);
-            followContext.SaveChanges();
+            blogPostRepository.Delete(id);
 
             return Ok();
         }
