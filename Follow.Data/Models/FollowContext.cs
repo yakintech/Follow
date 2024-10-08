@@ -16,5 +16,6 @@ namespace Follow.Data.Models
 
         public DbSet<BlogCategory> BlogCategories { get; set; }
         public DbSet<BlogPost> BlogPosts { get; set; }
+        public DbSet<AdminUser> AdminUsers { get; set; }
     }
 }

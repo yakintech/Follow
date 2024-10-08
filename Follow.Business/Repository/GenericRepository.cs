@@ -24,6 +24,11 @@ namespace Follow.Business.Repository
             return dbSet.Where(q => q.IsDeleted == false).OrderBy(x => x.CreatedDate).ToList();
         }
 
+        public T GetByQuery(Func<T, bool> query)
+        {
+            return dbSet.FirstOrDefault(query);
+        }
+
 
         public List<T> GetAllWithIncludes(string[] includes)
         {

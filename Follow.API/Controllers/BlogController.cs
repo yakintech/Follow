@@ -1,6 +1,7 @@
 ﻿using Follow.API.DTO.Blog;
 using Follow.Business.Repository;
 using Follow.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace Follow.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BlogController : ControllerBase
     {
         GenericRepository<BlogPost> blogPostRepository;
@@ -19,13 +21,35 @@ namespace Follow.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(CreateBlogRequestDTO model)
+        public IActionResult Post([FromForm]CreateBlogRequestDTO model)
         {
+            string fileName = "";
+            if (model.Image != null)
+            {
+                if (model.Image.ContentType != "image/jpeg" && model.Image.ContentType != "image/png" && model.Image.ContentType != "image/jpg")
+                {
+                    return BadRequest("Only jpeg, png, jpg files are allowed.");
+                }
+
+                //bu resmi projenin içine kaydetmek istiyorum
+                fileName = Guid.NewGuid() + Path.GetExtension(model.Image.FileName);
+
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    model.Image.CopyTo(stream);
+                }
+            }
+
+
+
             BlogPost blog = new BlogPost
             {
                 Title = model.Title,
                 Content = model.Content,
-                BlogCategoryId = model.CategoryId
+                BlogCategoryId = model.CategoryId,
+                MainImage = fileName
             };
 
             blogPostRepository.Create(blog);

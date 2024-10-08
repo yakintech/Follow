@@ -1,6 +1,7 @@
 ﻿using Follow.API.DTO.BlogCategory;
 using Follow.Business.Repository;
 using Follow.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace Follow.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BlogCategoryController : ControllerBase
     {
         private GenericRepository<BlogCategory> blogCategoryRepository;

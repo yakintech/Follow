@@ -11,7 +11,7 @@ namespace Follow.Data.Models
     {
         public string Title { get; set; }
         public string Content { get; set; }
-
+        public string MainImage { get; set; }
         public int BlogCategoryId { get; set; }
 
         [ForeignKey("BlogCategoryId")]
