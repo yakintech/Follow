@@ -18,5 +18,6 @@ namespace Follow.Data.Models
         public DbSet<BlogPost> BlogPosts { get; set; }
         public DbSet<AdminUser> AdminUsers { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<WebUser> WebUsers { get; set; }
     }
 }
