@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Follow.API.Filters;
 
 namespace Follow.API.Controllers
 {
@@ -22,6 +23,8 @@ namespace Follow.API.Controllers
        
 
         [HttpPost]
+        [RoleControl("Admin")]
+
         public IActionResult Post([FromForm]CreateBlogRequestDTO model)
         {
             string fileName = "";
@@ -113,6 +116,7 @@ namespace Follow.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [RoleControl("Admin")]
         public IActionResult Delete(int id)
         {
             var data = blogPostRepository.GetById(id);

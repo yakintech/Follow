@@ -39,3 +39,8 @@ No 'Access-Control-Allow-Origin' header is present on the requested resource. If
 
 Rate Limiter
 https://medium.com/devopsturkiye/net-core-rate-limiting-1afaed82f66a
+
+
+OWASP WEB API
+https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+OWASP API Security Top 10, API'lerdeki en yaygın güvenlik risklerini belirlemek ve bu risklerle nasıl başa çıkılacağını anlatan bir rehberdir.

@@ -1,4 +1,5 @@
 ﻿using Follow.API.DTO.BlogCategory;
+using Follow.API.Filters;
 using Follow.Business.Repository;
 using Follow.Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -9,6 +10,7 @@ namespace Follow.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BlogCategoryController : ControllerBase
     {
         private IGenericRepository<BlogCategory> blogCategoryRepository;
@@ -74,6 +76,7 @@ namespace Follow.API.Controllers
 
 
         [HttpDelete("{id}")]
+        [RoleControl("Admin")]
         public IActionResult Delete(int id)
         {
             var data = blogCategoryRepository.GetById(id);
