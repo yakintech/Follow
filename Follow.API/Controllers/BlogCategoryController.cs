@@ -5,6 +5,7 @@ using Follow.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Follow.API.Controllers
 {
@@ -14,16 +15,29 @@ namespace Follow.API.Controllers
     public class BlogCategoryController : ControllerBase
     {
         private IGenericRepository<BlogCategory> blogCategoryRepository;
+        private IMemoryCache memoryCache;
 
-        public BlogCategoryController(IGenericRepository<BlogCategory> blogCategoryRepository)
+        public BlogCategoryController(IGenericRepository<BlogCategory> blogCategoryRepository, IMemoryCache memoryCache)
         {
             this.blogCategoryRepository = blogCategoryRepository;
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            List<BlogCategory> data = blogCategoryRepository.GetAll();
+            string key = "BlogCategoryList";
+
+            if (!memoryCache.TryGetValue(key, out List<BlogCategory> data))
+            {
+                data = blogCategoryRepository.GetAll();
+                memoryCache.Set(key, data, new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpiration = DateTime.Now.AddMinutes(5),
+                    Priority = CacheItemPriority.Normal
+                });
+            }
+
             List<GetAllBlogCategoriesResponseDTO> response = new List<GetAllBlogCategoriesResponseDTO>();
 
             foreach (var item in data)
@@ -35,8 +49,8 @@ namespace Follow.API.Controllers
                     Description = item.Description
                 });
             }
-
             return Ok(response);
+      
         }
 
         [HttpGet("{id}")]

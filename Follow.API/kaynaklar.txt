@@ -29,7 +29,7 @@ Repository pattern , bir yazılım mimarisi tasarım desenidir. Repository patte
 JWT (JSON Web Token)
 https://assets.ctfassets.net/2ntc334xpx65/o5J4X472PQUI4ai6cAcqg/13a2611de03b2c8edbd09c3ca14ae86b/jwt-handbook-v0_14_1.pdf?mem=link&mkt_tok=ODU1LVFBSC02OTkAAAGQl-I9cK6P5ktfzwycCDu9DwvzDHDqt37JkHL4jeGaWZxG3q9LVfaxyg5SlF0xRkjcKh8tC9id809R3RpB6-1lYK_LPhBci2t9-GjvP028r1lk_C1MBg
 
-Json Web Token api projelerimizde kimlik doğrulama ve yetkilendirme işlemlerini gerçekleştirmemizi sağlayan bir standarttır. Json Web Token, bir token tabanlı kimlik doğrulama ve yetkilendirme mekanizmasıdır. Json Web Token, bir token tabanlı kimlik doğrulama ve yetkilendirme mekanizması olduğu için herhangi bir sunucu tarafında saklanmaz. Bu sayede Json Web Token, sunucu tarafında herhangi bir veri tabanı işlemi gerçekleştirmeden kimlik doğrulama ve yetkilendirme işlemlerini gerçekleştirebilir. Json Web Token, bir token tabanlı kimlik doğrulama ve yetkilendirme mekanizması olduğu için herhangi bir sunucu tarafında saklanmaz. Bu sayede Json Web Token, sunucu tarafında herhangi bir veri tabanı işlemi gerçekleştirmeden kimlik doğrulama ve yetkilendirme işlemlerini gerçekleştirebilir. Json Web Token, bir token tabanlı kimlik doğrulama ve yetkilendirme mekanizması olduğu için herhangi bir sunucu tarafında saklanmaz. Bu sayede Json Web Token, sunucu tarafında herhangi bir veri tabanı işlemi gerçekleştirmeden kimlik doğrulama ve yetkilendirme işlemlerini gerçekleştirebilir. Json Web Token, bir token tabanlı kimlik doğrulama ve yetkilendirme mekanizması olduğu için herhangi bir sunucu tarafında saklanmaz. Bu sayede Json Web Token, sunucu tarafında herhangi bir veri tabanı işlemi gerçekleştirmeden kimlik doğrulama ve yetkilendirme işlemlerini gerçekleştirebilir.
+Json Web Token api projelerimizde kimlik doğrulama ve yetkilendirme işlemlerini gerçekleştirmemizi sağlayan bir standarttır. Json Web Token, bir token tabanlı kimlik doğrulama ve yetkilendirme mekanizmasıdır.
 
 
 
@@ -44,3 +44,7 @@ https://medium.com/devopsturkiye/net-core-rate-limiting-1afaed82f66a
 OWASP WEB API
 https://owasp.org/API-Security/editions/2023/en/0x11-t10/
 OWASP API Security Top 10, API'lerdeki en yaygın güvenlik risklerini belirlemek ve bu risklerle nasıl başa çıkılacağını anlatan bir rehberdir.
+
+Yazilim Guvenligi Kitap
+https://www.kitapyurdu.com/kitap/yazilim-guvenligi-saldiri-ve-savunma/319268.html?srsltid=AfmBOooiDO8e5Y4tHgWhDVproN5DJ1qnXpCfDGiCa-UYE3ZfKX1ZyLsF
+

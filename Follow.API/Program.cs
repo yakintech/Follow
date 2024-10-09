@@ -76,6 +76,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddRepositories();
 builder.Services.AddValidators();
 
+builder.Services.AddMemoryCache();
+
 
 builder.Services.AddAutoMapper(typeof(CreateWebUserProfile));
 
