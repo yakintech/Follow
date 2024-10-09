@@ -12,6 +12,7 @@ using System.Threading.RateLimiting;
 using Follow.API.Middlewares;
 using Follow.API.DTO.WebUser;
 using Follow.API.Mapping.Models;
+using Follow.API.Extensions;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -72,17 +73,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 
-
-
-builder.Services.AddScoped<IValidator<CreateBlogCategoryRequestDTO>, CreateBlogCategoryRequestValidator>();
+builder.Services.AddRepositories();
+builder.Services.AddValidators();
 
 
 builder.Services.AddAutoMapper(typeof(CreateWebUserProfile));
 
-builder.Services.AddScoped<IGenericRepository<BlogCategory>, GenericRepository<BlogCategory>>();
-builder.Services.AddScoped<IGenericRepository<BlogPost>, GenericRepository<BlogPost>>();
-builder.Services.AddScoped<IGenericRepository<AdminUser>, GenericRepository<AdminUser>>();
-builder.Services.AddScoped<IGenericRepository<WebUser>, GenericRepository<WebUser>>();
+
+
 
 var app = builder.Build();
 
