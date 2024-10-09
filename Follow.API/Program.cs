@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.RateLimiting;
 using System.Threading.RateLimiting;
+using Follow.API.Middlewares;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,9 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddFluentValidationAutoValidation();
+
+//logger ekle
+builder.Services.AddLogging();
 
 builder.Services.AddCors(options =>
 {
@@ -76,11 +80,18 @@ builder.Services.AddScoped<IGenericRepository<AdminUser>, GenericRepository<Admi
 
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseMiddleware<ExceptionHandlingMiddleware>();
+
 }
 
 app.UseHttpsRedirection();
